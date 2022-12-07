@@ -2,8 +2,7 @@ import express from "express"
 import bodyParser from "body-parser";
 import https from "https"
 
-import { fileURLToPath } from 'url';
-console.log(fileURLToPath(import.meta.url));
+
 
 //const request=require("request");
 
@@ -14,7 +13,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/",function(req,res){
-res.sendFile(fileURLToPath(import.meta.url)+"/index.html");
+    res.sendFile('index.html', { root: '.' })
 });
 app.post("/",function(req,res){
 
@@ -53,11 +52,11 @@ var statusCode=response.statusCode;
 console.log(statusCode);
 if(statusCode==200){
     //if ok then through success page
-res.sendFile(fileURLToPath(import.meta.url)+"/success.html");
+    res.sendFile('success.html', { root: '.' })
 }
 else{
     // if not ok throw  the failure page
-    res.sendFile(fileURLToPath(import.meta.url)+"/failure.html");
+    res.sendFile('failure.html', { root: '.' })
 }
 
 });
